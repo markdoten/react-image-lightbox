@@ -1391,7 +1391,8 @@ class ReactImageLightbox extends Component {
           </div>
         );
       } else {
-        images.push(
+        const elem = this.props.customRender?.(imageSrc) || null;
+        elem ? images.push(elem) : images.push(
           <img
             {...(imageCrossOrigin ? { crossOrigin: imageCrossOrigin } : {})}
             className={`${imageClass} ril__image`}
@@ -1770,6 +1771,9 @@ ReactImageLightbox.propTypes = {
 
   // custom loader
   loader: PropTypes.node,
+
+  // custom render function
+  customRender: PropTypes.func
 };
 
 ReactImageLightbox.defaultProps = {
